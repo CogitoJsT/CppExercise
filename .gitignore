@@ -1,3 +1,5 @@
 
 *.exe
 .vscode/tasks.json
+Scratchpad/testmain.cpp
+.vscode/settings.json
