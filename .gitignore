@@ -3,3 +3,7 @@
 .vscode/tasks.json
 Scratchpad/testmain.cpp
 .vscode/settings.json
+*.ilk
+*.obj
+*.pdb
+.vscode/launch.json
