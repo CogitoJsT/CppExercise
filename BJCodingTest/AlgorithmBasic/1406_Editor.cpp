@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 int main()
@@ -11,10 +12,18 @@ int main()
     inputString.reserve(100000);
     std::wcin >> inputString;
 
+    std::vector<wchar_t> stringVector;
+    stringVector.reserve(100000);
+    for(auto ch : inputString)
+    {
+        stringVector.push_back(ch);
+    }
+
     int numOfCommands{0};
     std::wcin >> numOfCommands;
 
-    auto cursorPos = inputString.length();
+    //auto cursorPos = inputString.length();
+    auto cursorPos = stringVector.size();
     for(int i = 0; i < numOfCommands; ++i)
     {
         wchar_t com0;
@@ -23,7 +32,8 @@ int main()
         {
             wchar_t com1;
             std::wcin >> com1;
-            inputString.insert(cursorPos++, 1, com1);
+            //inputString.insert(cursorPos++, 1, com1);
+            stringVector.insert(stringVector.begin() + cursorPos++, com1);
         }
 
         if(com0 == L'L')
@@ -35,7 +45,8 @@ int main()
         }
         else if(com0 == L'D')
         {
-            if(cursorPos < inputString.length())
+            //if(cursorPos < inputString.length())
+            if(cursorPos < stringVector.size())
             {
                 ++cursorPos;
             }
@@ -44,13 +55,19 @@ int main()
         {
             if(cursorPos > 0)
             {
-                inputString.erase(cursorPos-1, 1);
+                //inputString.erase(cursorPos-1, 1);
+                stringVector.erase(stringVector.begin() + cursorPos-1);
                 --cursorPos;
             }
         }
     }
 
-    std::wcout << inputString + L"\n";
+    //std::wcout << inputString + L"\n";
+    for(auto elem : stringVector)
+    {
+        std::wcout << elem;
+    }
+    std::wcout << L"\n";
 
     return 0;
 }
