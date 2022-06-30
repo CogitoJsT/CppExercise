@@ -45,8 +45,8 @@ private:
 
 void init()
 {
-    std::wcin.tie(nullptr);
-    std::wcout.tie(nullptr);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
     std::ios_base::sync_with_stdio(false);
 }
 
@@ -55,38 +55,38 @@ int main()
     init();
 
     int numOfCommands {0};
-    std::wcin >> numOfCommands;
+    std::cin >> numOfCommands;
 
     MyQueue queue;
 
     for(int i = 0; i < numOfCommands; ++i)
     {
-        std::wstring command;
-        std::wcin >> command;
-        if(command == L"push")
+        std::string command;
+        std::cin >> command;
+        if(command == "push")
         {
-            std::wcin >> command;
+            std::cin >> command;
             queue.push(std::stoi(command));
         }
-        else if(command == L"pop")
+        else if(command == "pop")
         {
-            std::wcout << queue.pop() << L"\n";
+            std::cout << queue.pop() << "\n";
         }
-        else if(command == L"size")
+        else if(command == "size")
         {
-            std::wcout << queue.size() << L"\n";
+            std::cout << queue.size() << "\n";
         }
-        else if(command == L"empty")
+        else if(command == "empty")
         {
-            std::wcout << queue.empty() << L"\n";
+            std::cout << queue.empty() << "\n";
         }
-        else if(command == L"front")
+        else if(command == "front")
         {
-            std::wcout << queue.front() << L"\n";
+            std::cout << queue.front() << "\n";
         }
-        else if(command == L"back")
+        else if(command == "back")
         {
-            std::wcout << queue.back() << L"\n";
+            std::cout << queue.back() << "\n";
         }
     }
 
