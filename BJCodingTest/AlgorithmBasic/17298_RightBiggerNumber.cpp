@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stack>
-
-constexpr size_t BufferSize = 1000000;
-int nge[BufferSize]{};
+#include <memory>
 
 void init()
 {
@@ -21,6 +19,7 @@ int main()
     int numOfNumbers;
     std::cin >> numOfNumbers;
 
+    int *nge = new int[numOfNumbers];
     std::stack<PairData> intSt0;
     std::stack<PairData> intSt1;
 
@@ -69,5 +68,6 @@ int main()
     }
     std::cout << "\n";
 
+    delete[] nge;
     return 0;
 }
