@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <stack>
+#include <list>
 #include <memory>
 
 void init()
@@ -20,40 +20,37 @@ int main()
     std::cin >> numOfNumbers;
 
     int *nge = new int[numOfNumbers];
-    std::stack<PairData> intSt0;
-    std::stack<PairData> intSt1;
+    std::list<PairData> intList;
 
     int num;
     std::cin >> num;
-    intSt0.push(PairData(0, num));
-    auto isIntSt0Source = true;
+    intList.push_back(PairData(0, num));
     for (int i = 1; i < numOfNumbers; ++i)
     {
-        auto& refSourceStack = isIntSt0Source ? intSt0 : intSt1;
-        auto& refDestStack = isIntSt0Source ? intSt1 : intSt0;
-
         std::cin >> num;
 
-        while (!refSourceStack.empty())
+        for(auto it = intList.begin(); it != intList.end();)
         {
-            auto pastNum = refSourceStack.top();
-            refSourceStack.pop();
-
-            if (pastNum.second < num)
+            if (it->second < num)
             {
-                nge[pastNum.first] = num;
+                nge[it->first] = num;
+                it = intList.erase(it);
+                if (intList.empty())
+                {
+                    break;
+                }
             }
             else
             {
-                refDestStack.push(pastNum);
+                ++it;
             }
-            refDestStack.push(PairData(i, num));
         }
-        isIntSt0Source = isIntSt0Source ? false : true;
+
+        intList.push_back(PairData(i, num));
     }
 
     auto hasSpace{ false };
-    for(int i = 0; i < numOfNumbers; ++i)
+    for (int i = 0; i < numOfNumbers; ++i)
     {
         auto ngeNum = nge[i] < 1 ? -1 : nge[i];
         if (hasSpace)
