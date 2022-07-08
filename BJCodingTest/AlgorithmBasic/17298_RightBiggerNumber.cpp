@@ -39,10 +39,6 @@ int main()
             {
                 nge[it->first] = num;
                 it = intList.erase(it);
-                if (intList.empty())
-                {
-                    break;
-                }
             }
             else
             {
@@ -53,18 +49,10 @@ int main()
         intList.push_back(PairData(i, num));
     }
 
-    auto hasSpace{ false };
-    for (int i = 0; i < numOfNumbers; ++i)
+    std::cout << nge[0];
+    for (int i = 1; i < numOfNumbers; ++i)
     {
-        if (hasSpace)
-        {
-            std::cout << " ";
-        }
-        else
-        {
-            hasSpace = true;
-        }
-        std::cout << nge[i];
+        std::cout << " " << nge[i];
     }
     std::cout << "\n";
 
