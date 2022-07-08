@@ -3,6 +3,9 @@
 #include <list>
 #include <memory>
 
+constexpr int BufferSize = 1000000;
+int nge[BufferSize];
+
 void init()
 {
     std::cin.tie(nullptr);
@@ -16,10 +19,11 @@ int main()
 
     init();
 
+    std::fill_n(nge, BufferSize, -1);
+
     int numOfNumbers;
     std::cin >> numOfNumbers;
 
-    int *nge = new int[numOfNumbers];
     std::list<PairData> intList;
 
     int num;
@@ -52,7 +56,6 @@ int main()
     auto hasSpace{ false };
     for (int i = 0; i < numOfNumbers; ++i)
     {
-        auto ngeNum = nge[i] < 1 ? -1 : nge[i];
         if (hasSpace)
         {
             std::cout << " ";
@@ -61,10 +64,9 @@ int main()
         {
             hasSpace = true;
         }
-        std::cout << ngeNum;
+        std::cout << nge[i];
     }
     std::cout << "\n";
 
-    delete[] nge;
     return 0;
 }
