@@ -5,7 +5,7 @@
 
 constexpr int BufferSize = 1000000;
 int nge[BufferSize];
-int inNumberBuf[BufferSize];
+int inNumBuf[BufferSize];
 
 void init()
 {
@@ -23,26 +23,40 @@ int main()
 
     for (int i = 0; i < numOfNumbers; ++i)
     {
-        std::cin >> inNumberBuf[i];
+        std::cin >> inNumBuf[i];
     }
 
-    for (int i = 0; i < numOfNumbers - 1; ++i)
+    std::stack<int> intStack;
+
+    intStack.push(inNumBuf[numOfNumbers - 1]);
+    for (int i = numOfNumbers - 2; i >= 0; --i)
     {
-        int j = i + 1;
-        for(; j < numOfNumbers; ++j)
+        auto currentNum = inNumBuf[i];
+        auto stackTop = intStack.top();
+        if(currentNum < stackTop)
         {
-            if(inNumberBuf[i] < inNumberBuf[j])
+            nge[i] = stackTop;
+        }
+        else
+        {
+            intStack.pop();
+            auto top = -1L;
+            while(!intStack.empty())
             {
-                nge[i] = inNumberBuf[j];
-                break;
+                top = intStack.top();
+                if(currentNum < top)
+                {
+                    break;
+                }
+                else
+                {
+                    intStack.pop();
+                }
             }
+            nge[i] = intStack.empty() ? -1 : top;
         }
 
-        if(j == numOfNumbers)
-        {
-            nge[i] = -1;
-        }
-
+        intStack.push(currentNum);
     }
 
     nge[numOfNumbers-1] = -1;
