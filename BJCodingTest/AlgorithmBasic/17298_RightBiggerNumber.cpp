@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
-#include <list>
+#include <stack>
 #include <memory>
 
 constexpr int BufferSize = 1000000;
 int nge[BufferSize];
+int inNumberBuf[BufferSize];
 
 void init()
 {
@@ -15,39 +16,36 @@ void init()
 
 int main()
 {
-    using PairData = std::pair<int, int>;
-
     init();
-
-    std::fill_n(nge, BufferSize, -1);
 
     int numOfNumbers;
     std::cin >> numOfNumbers;
 
-    std::list<PairData> intList;
-
-    int num;
-    std::cin >> num;
-    intList.push_back(PairData(0, num));
-    for (int i = 1; i < numOfNumbers; ++i)
+    for (int i = 0; i < numOfNumbers; ++i)
     {
-        std::cin >> num;
+        std::cin >> inNumberBuf[i];
+    }
 
-        for(auto it = intList.begin(); it != intList.end();)
+    for (int i = 0; i < numOfNumbers - 1; ++i)
+    {
+        int j = i + 1;
+        for(; j < numOfNumbers; ++j)
         {
-            if (it->second < num)
+            if(inNumberBuf[i] < inNumberBuf[j])
             {
-                nge[it->first] = num;
-                it = intList.erase(it);
-            }
-            else
-            {
-                ++it;
+                nge[i] = inNumberBuf[j];
+                break;
             }
         }
 
-        intList.push_back(PairData(i, num));
+        if(j == numOfNumbers)
+        {
+            nge[i] = -1;
+        }
+
     }
+
+    nge[numOfNumbers-1] = -1;
 
     std::cout << nge[0];
     for (int i = 1; i < numOfNumbers; ++i)
