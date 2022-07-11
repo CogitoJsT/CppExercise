@@ -41,9 +41,11 @@ int main()
         {
             intStack.pop();
             auto top = -1L;
+            // Get top value of stack and pop until it is empty
             while(!intStack.empty())
             {
                 top = intStack.top();
+                // Stop if top value is greater than current value
                 if(currentNum < top)
                 {
                     break;
@@ -59,6 +61,7 @@ int main()
         intStack.push(currentNum);
     }
 
+    // Last nge is always -1
     nge[numOfNumbers-1] = -1;
 
     std::cout << nge[0];
