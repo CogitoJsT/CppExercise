@@ -40,7 +40,7 @@ int main()
     auto num0 = splitStr[0] + splitStr[1];
     auto num1 = splitStr[2] + splitStr[3];
 
-    auto sum = std::stoi(num0) + std::stoi(num1);
+    auto sum = std::stoll(num0) + std::stoll(num1);
     std::cout << sum << "\n";
 
     return 0;
