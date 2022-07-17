@@ -20,6 +20,11 @@ int main()
         std::string inputStr;
         std::getline(std::cin, inputStr);
 
+        if (std::cin.eof())
+        {
+            break;
+        }
+
         std::array<int, 4> countArr{};
 
         for (auto ch : inputStr)
