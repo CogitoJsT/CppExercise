@@ -15,45 +15,48 @@ int main()
 {
     init();
 
-    std::string inputStr;
-    std::getline(std::cin, inputStr);
-
-    std::array<int, 4> countArr{};
-
-    for (auto ch : inputStr)
+    for(int i = 0; i < 100; ++i)
     {
-        if (std::islower(ch))
+        std::string inputStr;
+        std::getline(std::cin, inputStr);
+
+        std::array<int, 4> countArr{};
+
+        for (auto ch : inputStr)
         {
-            countArr[0]++;
+            if (std::islower(ch))
+            {
+                countArr[0]++;
+            }
+            else if (std::isupper(ch))
+            {
+                countArr[1]++;
+            }
+            else if (std::isdigit(ch))
+            {
+                countArr[2]++;
+            }
+            else if (ch == ' ')
+            {
+                countArr[3]++;
+            }
         }
-        else if (std::isupper(ch))
-        {
-            countArr[1]++;
-        }
-        else if (std::isdigit(ch))
-        {
-            countArr[2]++;
-        }
-        else if (ch == ' ')
-        {
-            countArr[3]++;
-        }
+
+        auto hasSpace{ false };
+        std::for_each(std::begin(countArr), std::end(countArr), [&hasSpace](auto elem) {
+            if (hasSpace)
+            {
+                std::cout << " ";
+            }
+            else
+            {
+                hasSpace = true;
+            }
+            std::cout << elem;
+        });
+        std::cout << "\n";
+
     }
-
-    auto hasSpace{ false };
-    std::for_each(std::begin(countArr), std::end(countArr), [&hasSpace](auto elem) {
-        if (hasSpace)
-        {
-            std::cout << " ";
-        }
-        else
-        {
-            hasSpace = true;
-        }
-        std::cout << elem;
-    });
-    std::cout << "\n";
-
    
     return 0;
 }
