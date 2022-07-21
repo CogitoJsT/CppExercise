@@ -7,3 +7,4 @@ Scratchpad/testmain.cpp
 *.obj
 *.pdb
 .vscode/launch.json
+.vscode/c_cpp_properties.json
