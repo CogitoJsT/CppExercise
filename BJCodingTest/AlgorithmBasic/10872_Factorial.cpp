@@ -21,8 +21,12 @@ int main()
     }
     else
     {
-        auto ret = std::tgamma(inputNum) * inputNum;
-        std::cout << static_cast<unsigned int>(ret) << "\n";
+        unsigned int fact = inputNum;
+        for(unsigned int i = inputNum - 1; i > 0; --i)
+        {
+            fact *= i;
+        }
+        std::cout << fact << "\n";
     }
 
     return 0;
