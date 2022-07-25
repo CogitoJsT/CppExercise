@@ -9,14 +9,14 @@ void init()
     std::ios_base::sync_with_stdio(false);
 }
 
-int getSumOfGcd(std::vector<int> &numVec)
+decltype(auto) getSumOfGcd(std::vector<int> &numVec)
 {
-    int sum{0};
+    auto sum{0UL};
     for(int i = 0; i < numVec.size() - 1; ++i)
     {
         for(int j = i + 1; j < numVec.size(); ++j)
         {
-            sum += std::gcd(numVec[i], numVec[j]);
+            sum += static_cast<unsigned int>(std::gcd(numVec[i], numVec[j]));
         }
     }
     return sum;
