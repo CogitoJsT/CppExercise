@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <map>
 
 
 void init()
@@ -10,45 +11,34 @@ void init()
     std::ios_base::sync_with_stdio(false);
 }
 
-int binToDecim(std::string numStr)
-{
-    int sum {0};
-
-    for(size_t i = 0; i < numStr.size(); ++i)
-    {
-        sum *= 2;
-        if(numStr[i] == '1')
-        {
-            sum += 1;
-        }
-    }
-
-    return sum;
-}
-
 void binToOct(std::string &binaryNum)
 {
-    int firstOct = binaryNum.size() % 3;
-    int remainOct = binaryNum.size() / 3;
-    std::string subStr;
-    int decim{0};
+    int emptyDigit = 3 - binaryNum.size() % 3;
+    int remainOct = binaryNum.size() / 3 + (emptyDigit < 3 ? 1 : 0);
 
-    auto printOneOctal = [&](int pos) {
-        subStr = binaryNum.substr(0, pos);
-        decim = binToDecim(subStr);
-        std::cout << decim;
-        binaryNum = binaryNum.substr(pos);
+    std::map<std::string, std::string> binToOctalMap = {
+        {"000", "0"},
+        {"001", "1"},
+        {"010", "2"},
+        {"011", "3"},
+        {"100", "4"},
+        {"101", "5"},
+        {"110", "6"},
+        {"111", "7"},
     };
 
-    if(firstOct)
+    for(int i = 0; i < emptyDigit; ++i)
     {
-        printOneOctal(firstOct);
+        binaryNum = "0" + binaryNum;
     }
 
     for(int i = 0; i < remainOct; ++i)
     {
-        printOneOctal(3);
+        std::string subStr = binaryNum.substr(0, 3);
+        std::cout << binToOctalMap[subStr];
+        binaryNum = binaryNum.substr(3);
     }
+
     std::cout << "\n";
 }
 
