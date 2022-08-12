@@ -34,9 +34,8 @@ void binToOct(std::string &binaryNum)
 
     for(int i = 0; i < remainOct; ++i)
     {
-        std::string subStr = binaryNum.substr(0, 3);
+        std::string subStr = binaryNum.substr(3*i, 3);
         std::cout << binToOctalMap[subStr];
-        binaryNum = binaryNum.substr(3);
     }
 
     std::cout << "\n";
