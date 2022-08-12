@@ -27,6 +27,8 @@ void binToOct(std::string &binaryNum)
         {"111", "7"},
     };
 
+    if(emptyDigit == 3)
+        emptyDigit = 0;
     for(int i = 0; i < emptyDigit; ++i)
     {
         binaryNum = "0" + binaryNum;
