@@ -26,13 +26,32 @@ int main()
     std::string inputNumStr;
     std::cin >> inputNumStr;
 
+    if(inputNumStr == "0")
+    {
+        std::cout << "0\n";
+        return 0;
+    }
+
     for(int i = 0; i < inputNumStr.size(); ++i)
     {
         std::string binStr = mapOctToBin[inputNumStr[i]];
+        if(i == 0)
+        {
+            for(auto iter = binStr.begin(); iter != binStr.end(); )
+            {
+                if(*iter == '1')
+                {
+                    break;
+                }
+                else
+                {
+                    iter = binStr.erase(iter);
+                }
+            }
+        }
         std::cout << binStr;
     }
     std::cout << "\n";
-
 
     return 0;
 }
