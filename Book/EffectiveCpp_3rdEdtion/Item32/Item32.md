@@ -1,4 +1,4 @@
-# Item32: Make sure public inheritance models "is-a"
+# Item32. Make sure public inheritance models "is-a"
 public 상속 모형은 반드시 "is-a"를 따르도록 하자
 <br>
 <br>

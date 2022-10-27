@@ -14,7 +14,7 @@ public:
     }
 
 private:
-    virtual void doHealthValue() const      // Derived calss is able to override this virtual function
+    virtual void doHealthValue() const      // Derived calss can override this virtual function
     {
         // Default algorithm for calculating health value
 
