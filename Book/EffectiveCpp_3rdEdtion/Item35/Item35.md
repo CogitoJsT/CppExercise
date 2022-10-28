@@ -272,7 +272,7 @@ GameLevel currentLevel;
 
 EvilBadGuy ebg2(
         std::bind(&GameCharacter::health,  // 체력치 계산을 위한 멤버 함수를 사용하는 캐릭터
-                  currentLevel,
+                  &currentLevel,
                   std::placeholder_1)
         );
 
