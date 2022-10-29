@@ -129,7 +129,7 @@ Output:
 8) bind to a mem_fn that is a pointer to data member: 10
 9) use smart pointers to call members of the referenced objects: 10 10
 ```
-
+<br>
 
 # References
 - [cppreference, std::bind](https://en.cppreference.com/w/cpp/utility/functional/bind)

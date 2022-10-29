@@ -277,3 +277,61 @@ EvilBadGuy ebg2(
         );
 
 ```
+```std::bind``` : Refer to [std::bind](../../../CppReference/UtilitiesLibrary/FunctionObject/bind.md)
+
+- ebg2 체력치 계산에 GameLevel::health 함수를 쓰기 위해서는 매개변수 두 개를 받는 함수를 한 개만 받는 함수로 바꿔야 함
+- 지금의 예제에서는 ebg2의 체력치 계산에 쓸 GameLevel 객체로서 currentLevel 만을 쓸 생각이므로 GameLevel::health 함수가 호출될 때마다 currentLevel 이 사용되도록 ```binding``` 
+<br><br>
+
+**```함수 포인터 대신에 std::function 을 사용함으로써 사용자가 게임 캐릭터의 체력치를 계산할 때, 시그니처가 호환되는 함수호출성 개체는 어떤 것도 원하는 대로 구사할 수 있도록 융통성이 활짝 열림```**
+<br><br>
+
+# 고전적인 전략 패턴
+- 체력치 계산 함수를 나타내는 클래스 계통을 따로 만든다.
+- 실제 체력치 계산 함수는 이 클래스 계통의 가상 멤버 함수로 만든다.
+<br><br>
+<img src="ClassDiag00.jpg" style="height: 300px; width: 700px;">
+<br><br>
+
+```c++
+class GameCharacter;
+
+class HealthCalcFunc
+{
+public:
+    ...
+    virtual int calc(const GameCharacter& gc) const
+    {
+        ...
+    }
+    ...
+};
+
+// Global instance for default calculation
+HealthCalcFunc defaultHealthCalc;
+
+class GameCharacter
+{
+public:
+    explicit GameCharacter(HealthCalcFunc *phcf = &defaultHealthCalc)
+        : pHealthCalc(phcf)
+    {
+        ...
+    }
+    int healthValue() const
+    {
+        return pHealthCacl->calc(*this);
+    }
+private:
+    HealthCalcFunc *pHealthCalc;
+};
+```
+<br>
+
+```
+QUESTION
+
+1. 코드를 보면 GameCharacter의 pHealthCalc 는 객체를 외부에서 받게 되어 있다. 즉, GameCharacter 가 소멸될 때 해당 객체는 소멸되지 않는다. 그런데 왜 Class Diagram 에는 그 관계를 Composition 관계를 표현한걸까? (Aggregation 관계 표현이 맞는듯)
+
+2. GameCharacter 의 생성자에 default HealthCalcFunc 를 넣어주기 위해 HealthCalcFunc을 전역으로 선언했다. 이것이 과연 좋은 설계 방향일까?
+```
